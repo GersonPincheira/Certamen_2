@@ -43,8 +43,8 @@ public class Respuesta extends AppCompatActivity {
 
             @Override
             protected String doInBackground(Void... voids) {
-                //String resultado = new HttpServerConnection().connectToServer("https://api.github.com/users/" + usuario + "/repos", 15000);
-                String resultado = new HttpServerConnection().connectToServer("http://www.mocky.io/v2/57eee3822600009324111202", 15000);
+                String resultado = new HttpServerConnection().connectToServer("https://api.github.com/users/" + usuario + "/repos", 15000);
+                //String resultado = new HttpServerConnection().connectToServer("http://www.mocky.io/v2/57eee3822600009324111202", 15000);
                 return resultado;
             }
 
@@ -52,8 +52,12 @@ public class Respuesta extends AppCompatActivity {
             protected void onPostExecute(String Result) {
                 if (Result != null) {
                     System.out.println();
-                    adapter = new UIAdapter(getLista(Result));
-                    recyclerView.setAdapter(adapter);
+                    if(getLista(Result).isEmpty()) {
+                        encabezado.setText("NO EXISTE USUARIO INGRESADO");
+                    }else{
+                        adapter = new UIAdapter(getLista(Result));
+                        recyclerView.setAdapter(adapter);
+                    }
 
                 }
             }
