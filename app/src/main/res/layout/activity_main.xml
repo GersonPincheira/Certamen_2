@@ -4,7 +4,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ejemplo.certamen2.MainActivity">
+    tools:context="ejemplo.certamen2.activities.MainActivity">
 
     <TextView
         android:text="Git Finder"
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="usuario"
+        android:hint="Usuario"
         android:ems="10"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
