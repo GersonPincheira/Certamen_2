@@ -3,20 +3,21 @@ package ejemplo.certamen2;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
-import connection.CustomItemClickListener;
-
-import static android.support.v4.app.ActivityCompat.startActivity;
 
 /**
  * Created by gerson on 30-09-16.
@@ -24,28 +25,26 @@ import static android.support.v4.app.ActivityCompat.startActivity;
 
 public class UIAdapter extends RecyclerView.Adapter<UIAdapter.ViewHolder> {
     private List<DatosGit> lista;
-
     Context mContext;
-    CustomItemClickListener listener;
 
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
         public TextView TextTitulo;
         public TextView TextDescrip;
         public TextView TextActual;
-        public LinearLayout boton;
+        public CardView cardView;
 
         public ViewHolder(View v) {
             super(v);
             TextTitulo = (TextView) v.findViewById(R.id.textTitulo);
             TextDescrip = (TextView) v.findViewById(R.id.textDescricion);
             TextActual = (TextView) v.findViewById(R.id.textActualizado);
-            boton = (LinearLayout) v.findViewById(R.id.boton);
+            cardView = (CardView)   v.findViewById(R.id.cv);
+
 
         }
 
     }
-
     public UIAdapter(List<DatosGit> datos) {
         lista = datos;
     }
@@ -59,16 +58,25 @@ public class UIAdapter extends RecyclerView.Adapter<UIAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(UIAdapter.ViewHolder holder, int position) {
-        DatosGit dato = lista.get(position);
+        final DatosGit dato = lista.get(position);
         holder.TextTitulo.setText(dato.getTitulo());
-        holder.TextDescrip.setText(dato.getDescripcion());
+        if(dato.getDescripcion().equals("null")){
+            holder.TextDescrip.setText("No hay informacion");
+        }else{
+            holder.TextDescrip.setText(dato.getDescripcion());
+        }
         holder.TextActual.setText(dato.getActualizacion());
-
     }
+
 
     @Override
     public int getItemCount() {
         return lista.size();
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
     }
 
 }
