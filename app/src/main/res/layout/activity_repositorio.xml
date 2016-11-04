@@ -4,7 +4,8 @@
     android:id="@+id/activity_respuesta"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ejemplo.certamen2.activities.RepositorioActivity">
+    tools:context="ejemplo.certamen2.activities.RepositorioActivity"
+    android:background="@drawable/background">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,7 +13,8 @@
         android:id="@+id/textView2"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@color/cardview_light_background" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"

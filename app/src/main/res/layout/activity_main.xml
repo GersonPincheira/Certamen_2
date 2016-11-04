@@ -4,36 +4,46 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ejemplo.certamen2.activities.MainActivity">
-
-    <TextView
-        android:text="Git Finder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="78dp"
-        android:id="@+id/textView"
-        android:textSize="36sp" />
+    tools:context="ejemplo.certamen2.activities.MainActivity"
+    android:theme="@style/Base.Theme.AppCompat.Light.DialogWhenLarge"
+    android:background="@drawable/background">
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:hint="Usuario"
+        android:maxLines="1"
         android:ems="10"
+        android:layout_marginTop="12dp"
+        android:id="@+id/editText"
+        android:textColorLink="@android:color/holo_blue_dark"
         android:layout_below="@+id/textView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="45dp"
-        android:id="@+id/editText" />
+        android:textAlignment="center"
+        android:textColor="?android:attr/colorForegroundInverse" />
 
     <Button
         android:text="Buscar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:id="@+id/button"
         android:layout_below="@+id/editText"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="39dp"
-        android:id="@+id/button" />
+        style="@style/Widget.AppCompat.Button"
+        android:elevation="12dp" />
+
+    <TextView
+        android:text="Git Finder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="112dp"
+        android:id="@+id/textView"
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="50sp"
+        android:textColor="@color/cardview_light_background" />
 
 </RelativeLayout>
