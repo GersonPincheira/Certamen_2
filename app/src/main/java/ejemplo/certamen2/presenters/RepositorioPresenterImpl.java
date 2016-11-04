@@ -1,8 +1,10 @@
 package ejemplo.certamen2.presenters;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.widget.RecyclerView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,9 +13,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import connection.HttpServerConnection;
-import ejemplo.certamen2.DatosGit;
-import ejemplo.certamen2.UIAdapter;
+import ejemplo.certamen2.Models.HttpServerConnection;
+import ejemplo.certamen2.Models.DatosGit;
+import ejemplo.certamen2.Models.UIAdapter;
+import ejemplo.certamen2.activities.MainActivity;
 import ejemplo.certamen2.presenters.contract.RepositorioPresenter;
 
 /**
@@ -24,11 +27,12 @@ public class RepositorioPresenterImpl implements RepositorioPresenter {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private String usuario;
+    private Activity activity;
 
-    public RepositorioPresenterImpl(String usuario, RecyclerView recyclerview, RecyclerView.Adapter adapter) {
+    public RepositorioPresenterImpl(String usuario, RecyclerView recyclerview, Activity activity) {
         this.usuario=usuario;
         this.recyclerView = recyclerview;
-        this.adapter = adapter;
+        this.activity=activity;
     }
 
     @Override
@@ -57,19 +61,40 @@ public class RepositorioPresenterImpl implements RepositorioPresenter {
     }
 
     @Override
-    public String Extraerdatos() {
-        String repositorios = new HttpServerConnection().connectToServer("https://api.github.com/users/" + usuario + "/repos", 15000);
-        return repositorios;
+    public AsyncTask<Void, Void, String> Extraerdatos() {
+        AsyncTask<Void,Void,String> task = new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void... voids) {
+                String repositorios = new HttpServerConnection().connectToServer("https://api.github.com/users/" + usuario + "/repos", 15000);
+                return repositorios;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+
+                ConnectarAdapter(s);
+            }
+        };
+        return task;
     }
 
     @Override
     public void ConnectarAdapter(String result) {
-        if (result != null) {
-            System.out.println();
-            adapter = new UIAdapter(getLista(result));
+        if (result != null)
+        {
+            this.adapter = new UIAdapter(getLista(result),activity);
             recyclerView.setAdapter(adapter);
-            }
 
+        }else{
+            Toast toast = Toast.makeText(activity,"Usuario No Encontrado",Toast.LENGTH_SHORT);
+            toast.show();
+            Intent i = new Intent(activity, MainActivity.class );
+            activity.startActivity(i);
         }
+
+
     }
+
+
+}
 

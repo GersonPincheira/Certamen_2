@@ -1,4 +1,4 @@
-package connection;
+package ejemplo.certamen2.Models;
 
 import java.io.BufferedReader;
 import java.io.IOException;

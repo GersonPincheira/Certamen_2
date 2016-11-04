@@ -1,4 +1,4 @@
-package ejemplo.certamen2;
+package ejemplo.certamen2.Models;
 
 /**
  * Created by gerson on 30-09-16.
